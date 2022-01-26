@@ -1,7 +1,7 @@
 const data = require('../data/zoo_data');
 
 function getSpeciesByIds(...ids) {
-  if (ids === []) {
+  if (ids == []) {
     return [];
   }
   return data.species.filter((bixo) => ids.forEach((id) => {
@@ -12,8 +12,7 @@ function getSpeciesByIds(...ids) {
 }
 
 // '78460a91-f4da-4dea-a469-86fd2b8ccc84'
-console.log(getSpeciesByIds('78460a91-f4da-4dea-a469-86fd2b8ccc84',
-  'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
+console.log(getSpeciesByIds('78460a91-f4da-4dea-a469-86fd2b8ccc84'));
 
 module.exports = getSpeciesByIds;
 
