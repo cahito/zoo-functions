@@ -3,11 +3,11 @@ const data = require('../data/zoo_data');
 const { employees } = data;
 
 function getEmployeeByName(employeeName) {
-  return employees.reduce((accumulator, currentValue) => {
-    if (employeeName === currentValue.firstName || employeeName === currentValue.lastName) {
-      return currentValue;
+  return employees.reduce((acc, cur) => {
+    if (employeeName === cur.firstName || employeeName === cur.lastName) {
+      return cur;
     }
-    return accumulator;
+    return acc;
   }, {});
 }
 
