@@ -1,18 +1,20 @@
 const data = require('../data/zoo_data');
 
-const total = {
-  lions: 4,
-  tigers: 2,
-  bears: 3,
-  penguins: 4,
-  otters: 4,
-  frogs: 2,
-  snakes: 2,
-  elephants: 4,
-  giraffes: 6,
-};
+const { species } = data;
+const acheBixo = (parametro) => species.find(({ name }) => parametro.specie === name);
+const totalCada = (para) => acheBixo({ specie: para }).residents.length;
 
-const acheBixo = (parametro) => data.species.find(({ name }) => parametro.specie === name);
+const total = {
+  lions: totalCada('lions'),
+  tigers: totalCada('tigers'),
+  bears: totalCada('bears'),
+  penguins: totalCada('penguins'),
+  otters: totalCada('otters'),
+  frogs: totalCada('frogs'),
+  snakes: totalCada('snakes'),
+  elephants: totalCada('elephants'),
+  giraffes: totalCada('giraffes'),
+};
 
 function countAnimals(animal) {
   if (!animal) {
@@ -28,7 +30,7 @@ module.exports = countAnimals;
 
 // reduce((acc, cur) => ((acc !== cur) ? acc + 1 : acc), 0)
 
-// console.log(countAnimals({ specie: 'otters', sex: 'male' }));
+// console.log(countAnimals({ specie: 'penguins', sex: 'male' }));
 
 // let teste = { test1: 'coisa', test2: 'nenhuma' };
 
