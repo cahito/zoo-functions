@@ -20,6 +20,7 @@ function countEntrants(entrants) {
 }
 
 function calculateEntry(entrants) {
+  // seguindo a dica do Rapha Martins de que objeto não é igual a objeto, resolvi usar Array.isArray
   if (!entrants || !Array.isArray(entrants)) {
     return 0;
   }
@@ -31,14 +32,14 @@ function calculateEntry(entrants) {
 
 module.exports = { calculateEntry, countEntrants };
 
-const teste = [
-  { name: 'Gilmar1', age: 5 },
-  { name: 'Gilmar2', age: 5 },
-  { name: 'Gilmar3', age: 5 },
-  { name: 'Gilmar4', age: 18 },
-  { name: 'Gilmar5', age: 18 },
-  { name: 'Gilmar6', age: 50 },
-];
+// const teste = [
+//   { name: 'Gilmar1', age: 5 },
+//   { name: 'Gilmar2', age: 5 },
+//   { name: 'Gilmar3', age: 5 },
+//   { name: 'Gilmar4', age: 18 },
+//   { name: 'Gilmar5', age: 18 },
+//   { name: 'Gilmar6', age: 50 },
+// ];
 
-console.log(countEntrants(teste));
-console.log(calculateEntry({}));
+// console.log(countEntrants(teste));
+// console.log(calculateEntry({}));

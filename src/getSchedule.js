@@ -3,7 +3,7 @@ const data = require('../data/zoo_data');
 const { species, hours } = data;
 const weekday = Object.keys(hours);
 const animals = species.map((bixo) => bixo.name);
-
+// console.log(animals);
 // const quem = species.filter(({ name, availability }) => (availability.includes(scheduleTarget) ? name : ''));
 /* const horario = weekday.forEach((dia) => {
   return {
@@ -23,10 +23,7 @@ function getSchedule(scheduleTarget) {
   if (weekday.includes(scheduleTarget)) {
     const abre = hours[scheduleTarget].open;
     const fecha = hours[scheduleTarget].close;
-    const quem = species.filter((bixo) => {
-      if (bixo.availability.includes(scheduleTarget)) {
-        return bixo.name;
-      } });
+    const quem = species.filter((bixo) => ((bixo.availability.includes(scheduleTarget)) ? bixo.name : ''));
     return {
       scheduleTarget: {
         officeHour: `Open from ${abre}am until ${fecha}pm`,
@@ -34,12 +31,12 @@ function getSchedule(scheduleTarget) {
       },
     };
   }
-  return horario;
+  return 'horario';
 }
 
 module.exports = getSchedule;
 
-console.log(getSchedule('Tuesday'));
+// console.log(getSchedule('Tuesday'));
 // console.log(getSchedule('otters'));
 // console.log(getSchedule());
 // console.log(getSchedule('E você, quem é?'));
