@@ -107,10 +107,10 @@ function getAnimalMap(options) {
 // }
 module.exports = getAnimalMap;
 
-// console.log(getAnimalMap());
+console.log(getAnimalMap());
 // console.log(getAnimalMap({ sex: 'female' }));
 // console.log(getAnimalMap({ sex: 'female', sorted: true }));
 // console.log(getAnimalMap({ includeNames: true }));
 // console.log(getAnimalMap({ includeNames: true, sorted: true }));
-console.log(getAnimalMap({ includeNames: true, sex: 'male' }));
+// console.log(getAnimalMap({ includeNames: true, sex: 'male' }));
 // console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));

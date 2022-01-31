@@ -17,4 +17,4 @@ module.exports = getEmployeeByName;
   }
   return acc;
 }, {}); */
-console.log(getEmployeeByName());
+// console.log(getEmployeeByName());
