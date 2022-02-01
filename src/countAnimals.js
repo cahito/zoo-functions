@@ -23,7 +23,8 @@ function countAnimals(animal) {
   if (!animal.sex) {
     return acheBixo(animal).residents.length;
   }
-  return acheBixo(animal).residents.reduce((ac, cu) => ((cu.sex === animal.sex) ? ac + 1 : ac), 0);
+  return acheBixo(animal).residents
+    .reduce((acc, cur) => ((cur.sex === animal.sex) ? acc + 1 : acc), 0);
 }
 
 module.exports = countAnimals;

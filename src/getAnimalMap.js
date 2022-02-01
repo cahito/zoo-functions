@@ -82,6 +82,7 @@ const comSex = (parameter) => species.reduce((acc, cur) => {
   }, {}));
   return acc;
 }, {});
+
 // .filter((bixo) => bixo.sex === parameter.sex)
 const comVariacao = (parameter) => {
   if (parameter.sex && !parameter.sorted) {

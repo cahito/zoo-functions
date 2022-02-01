@@ -5,8 +5,11 @@ const weekday = Object.keys(hours);
 const animals = species.map((bixo) => bixo.name);
 const abre = (parameter) => hours[parameter].open;
 const fecha = (parameter) => hours[parameter].close;
-const quem = (parameter) => species.filter((bixo) => bixo.availability
-  .includes(parameter)).map((ind) => `${ind.name}`);
+
+function quem(parameter) {
+  return species.filter((bixo) => bixo.availability
+    .includes(parameter)).map((ind) => `${ind.name}`);
+}
 
 function daily(parameter) {
   const result = {};
@@ -29,7 +32,43 @@ function dia(parameter) {
   return daily(parameter);
 }
 
-const horario = {
+function padrao(parameter) {
+  if (parameter === 'Monday') {
+    return {
+      officeHour: 'CLOSED',
+      exhibition: 'The zoo will be closed!',
+    };
+  }
+  return {
+    officeHour: `Open from ${abre(parameter)}am until ${fecha(parameter)}pm`,
+    exhibition: quem(parameter),
+  };
+}
+
+const horario = () => weekday.reduce((acc, cur, idx) => {
+  acc[cur] = acc[cur] || padrao(cur);
+  return acc;
+}, {});
+
+// .includes() acrescentado com a dica do Rapha Martins
+function getSchedule(scheduleTarget) {
+  if (animals.includes(scheduleTarget)) {
+    return species.find((bixo) => bixo.name === scheduleTarget).availability;
+  }
+  if (weekday.includes(scheduleTarget)) {
+    return dia(scheduleTarget);
+  }
+  return horario();
+}
+
+module.exports = getSchedule;
+
+// console.log(getSchedule('Wednesday'));
+// console.log(getSchedule('otters'));
+// console.log(getSchedule());
+// console.log(getSchedule('E você, quem é?'));
+
+/* const horario = {
   Tuesday: {
     officeHour: 'Open from 8am until 6pm',
     exhibition: ['lions', 'tigers', 'bears', 'penguins', 'elephants', 'giraffes'],
@@ -55,7 +94,7 @@ const horario = {
     exhibition: ['lions', 'bears', 'penguins', 'snakes', 'elephants'],
   },
   Monday: { officeHour: 'CLOSED', exhibition: 'The zoo will be closed!' },
-};
+}; */
 // console.log(animals);
 // const quem = species.filter(({ name, availability }) => (availability.includes(scheduleTarget) ? name : ''));
 /* function horario() {
@@ -66,21 +105,3 @@ const horario = {
   return total;
 } */
 // console.log(horario());
-
-// .includes() acrescentado com a dica do Rapha Martins
-function getSchedule(scheduleTarget) {
-  if (animals.includes(scheduleTarget)) {
-    return species.find((bixo) => bixo.name === scheduleTarget).availability;
-  }
-  if (weekday.includes(scheduleTarget)) {
-    return dia(scheduleTarget);
-  }
-  return horario;
-}
-
-module.exports = getSchedule;
-
-// console.log(getSchedule('Wednesday'));
-// console.log(getSchedule('otters'));
-// console.log(getSchedule());
-// console.log(getSchedule('E você, quem é?'));
