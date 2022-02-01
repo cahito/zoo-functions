@@ -4,17 +4,14 @@ const { species } = data;
 
 // padrao feito com reduce baseado no video https://www.youtube.com/watch?v=O_bSjsLga48 , indicado por Yuut
 /* const arrayTeste = [
-  { nome: 'objA', local: 1, carac: 'A' },
-  { nome: 'objB', local: 2, carac: 'B' },
-  { nome: 'objC', local: 3, carac: 'C' },
-  { nome: 'objD', local: 2, carac: 'D' },
-  { nome: 'objE', local: 1, carac: 'E' },
+  { nome: 'objA', local: 'NE', carac: 'A' },
+  { nome: 'objB', local: 'CO', carac: 'B' },
+  { nome: 'objC', local: 'SE', carac: 'C' },
+  { nome: 'objD', local: 'SE', carac: 'D' },
+  { nome: 'objE', local: 'NE', carac: 'E' },
 ];
 const teste = () => arrayTeste.reduce((acc, cur) => {
-  console.log(acc);
-  console.log(cur);
   acc[cur.local] = acc[cur.local] || [];
-  console.log(acc);
   acc[cur.local].push(cur.carac);
   return acc;
 }, {});
@@ -38,12 +35,18 @@ const comNomes = () => species.reduce((acc, cur) => {
 }, {});
 
 const completo = (parameter) => species.reduce((acc, cur) => {
-  const select = cur.residents.filter((bixo) => (bixo.sex === parameter.sex));
   acc[cur.location] = acc[cur.location] || [];
-  acc[cur.location].push(select.reduce((ac2, cu2) => {
+  acc[cur.location].push(cur.residents.reduce((ac2, cu2) => {
+    const select = cur.residents.filter((bixo) => (bixo.sex === parameter.sex));
     const aCc = ac2;
     aCc[cur.name] = aCc[cur.name] || [];
-    aCc[cur.name].push(cu2.name);
+    // estrutura de função interna com ajuda de Sheila Nakashima
+    const nomeSexo = () => {
+      if (select.includes(cu2)) {
+        return aCc[cur.name].push(cu2.name);
+      }
+    };
+    nomeSexo();
     aCc[cur.name].sort();
     return aCc;
   }, {}));
@@ -63,14 +66,18 @@ const comSort = () => species.reduce((acc, cur) => {
 }, {});
 
 const comSex = (parameter) => species.reduce((acc, cur) => {
-  console.log(acc);
   acc[cur.location] = acc[cur.location] || [];
-  console.log(acc);
   acc[cur.location].push(cur.residents.reduce((ac2, cu2) => {
+    const select = cur.residents.filter((bixo) => (bixo.sex === parameter.sex));
     const acS = ac2;
     acS[cur.name] = acS[cur.name] || [];
-    acS[cur.name].push(cu2.name);
-    console.log(acS);
+    // estrutura de função interna com ajuda de Sheila Nakashima
+    const nomeSexo = () => {
+      if (select.includes(cu2)) {
+        return acS[cur.name].push(cu2.name);
+      }
+    };
+    nomeSexo();
     return acS;
   }, {}));
   return acc;
@@ -107,10 +114,10 @@ function getAnimalMap(options) {
 // }
 module.exports = getAnimalMap;
 
-console.log(getAnimalMap());
+// console.log(getAnimalMap());
 // console.log(getAnimalMap({ sex: 'female' }));
 // console.log(getAnimalMap({ sex: 'female', sorted: true }));
 // console.log(getAnimalMap({ includeNames: true }));
 // console.log(getAnimalMap({ includeNames: true, sorted: true }));
-// console.log(getAnimalMap({ includeNames: true, sex: 'male' }));
+// console.log(getAnimalMap({ includeNames: true, sex: 'female' }));
 // console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
